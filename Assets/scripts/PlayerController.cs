@@ -35,7 +35,7 @@ public class layerController : MonoBehaviour
     }
       void SetCountText()
        {
-           countText.text = "Wayward Capsules Wrangled: " + count.ToString(); // sets count to output to string
+           countText.text = "ARTI units recovered: " + count.ToString(); // sets count to output to string
 
            if (count >= 12)  //checks ammount collected
          {
@@ -73,7 +73,7 @@ public class layerController : MonoBehaviour
             Destroy(gameObject);// Destroy player object
 
             winTextObject.gameObject.SetActive(true);              // Update the winText for loss
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "WhaaaaH Waaahhhaaahhhhaaa  You Lose!";
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "Pirates caught you... Mission Failed";
         }
     }
 }
