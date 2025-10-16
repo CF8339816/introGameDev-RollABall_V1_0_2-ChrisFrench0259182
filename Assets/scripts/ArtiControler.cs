@@ -5,42 +5,38 @@ using UnityEngine.InputSystem;
 
 public class ArtiControler : MonoBehaviour
 {
-  
-    private Rigidbody rb;
-    private int count;
-    private float movementX;
-    private float movementY;
-    public float speed = 0;
-    public TextMeshProUGUI countText;
-    public GameObject winTextObject;
 
-   
-    void Start()
+    private Rigidbody rb;// Rigidbody for MrBall
+    private int count;  //Adds a counter
+
+    private float movementX;  // Movement along X axes
+    private float movementY;  // Movement along Y axes
+
+
+    public float speed = 0; // Speed MrBall moves
+    public TextMeshProUGUI countText; //creates Count Text obj
+    public GameObject winTextObject;  //creates win text obj
+
+    void Start() // Start called before first frame update
     {
-       
-        rb = GetComponent<Rigidbody>();
-        count = 0;
-        SetCountText();
+        rb = GetComponent<Rigidbody>();  // Get & stores Rigidbody attached to MrBall
+        count = 0; // sets counter to 0
+        SetCountText(); //updates count
         winTextObject.SetActive(false);
-
-
     }
 
- 
-    void OnMove(InputValue movementValue)
+    void OnMove(InputValue movementValue)  // Function called when movement input detected
     {
-    
-        Vector2 movementVector = movementValue.Get<Vector2>();
+        Vector2 movementVector = movementValue.Get<Vector2>();    // Converts input value into Vector2 inputfor movement
 
-   
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        movementX = movementVector.x;// Stores the X movement
+        movementY = movementVector.y;// Stores the y movement
     }
     void SetCountText()
     {
-        countText.text = "Lost ARTI units recovered: " + count.ToString(); // sets count to output to string
+        countText.text = "ARTI units recovered: " + count.ToString(); // sets count to output to string
 
-        if (count >= 9)  //checks ammount collected
+        if (count >= 12)  //checks ammount collected
         {
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
@@ -48,9 +44,12 @@ public class ArtiControler : MonoBehaviour
     }
 
 
+
+
+
     private void FixedUpdate()
     {
-   
+
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
 
@@ -58,15 +57,13 @@ public class ArtiControler : MonoBehaviour
 
             //  transform.rotation = Quaternion.LookRotation(movement); // basic snapped rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f); //smooths out rotation 
-  
 
-          transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
 
         rb.AddForce(movement * speed);
     }
-
-
 
 
     void OnTriggerEnter(Collider other)
@@ -88,8 +85,13 @@ public class ArtiControler : MonoBehaviour
             Destroy(gameObject);// Destroy player object
 
             winTextObject.gameObject.SetActive(true);              // Update the winText for loss
-            winTextObject.GetComponent<TextMeshProUGUI>().text = " Pirates win Mission Failed";
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "Pirates caught you... Mission Failed";
         }
     }
-
 }
+
+
+
+
+
+
