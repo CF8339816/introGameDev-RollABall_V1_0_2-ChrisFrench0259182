@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/OrbVelocitator.unity
     guid: 9f428abc4f930c64f955b1ed180b08d3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RolerBall-a-GoGo.unity
     guid: 97948e0c393614649b785f67270048ce
   m_configObjects:
