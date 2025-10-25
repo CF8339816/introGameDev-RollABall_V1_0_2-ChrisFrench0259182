@@ -3,8 +3,8 @@ using UnityEngine;
 public class ArtiCam : MonoBehaviour
 {
     // public GameObject MrBall;   // Reference to MrBall GameObject
-    public GameObject player;
-
+    //public GameObject player;
+    public Transform player;
     private Vector3 offset;  // Distance offset camera to player
 
     void Start() // called before first frame
@@ -12,12 +12,13 @@ public class ArtiCam : MonoBehaviour
 
 
         //offset = transform.position - MrBall.transform.position; // Calculate initial offset between cameraand player
-        offset = transform.position - player.transform.position;
-
+        //offset = transform.position - player.transform.position;
+        offset = transform.position - player.position;
     }
     void LateUpdate()   // LateUpdate called once/frame after Update functions completed
     {
-        transform.position = player.transform.position + offset;
+        //transform.position = player.transform.position + offset;
         // transform.position = MrBall.transform.position + offset; //maintains offset
+        transform.position = player.position + offset;
     }
 }
