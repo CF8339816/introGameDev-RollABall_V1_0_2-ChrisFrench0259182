@@ -35,7 +35,7 @@ public class layerController : MonoBehaviour
     }
       void SetCountText()
        {
-           countText.text = "ARTI units recovered: " + count.ToString(); // sets count to output to string
+           countText.text = "Collect all 12 ARTI Units \n ARTI units recovered: " + count.ToString(); // sets count to output to string
 
            if (count >= 12)  //checks ammount collected
          {
