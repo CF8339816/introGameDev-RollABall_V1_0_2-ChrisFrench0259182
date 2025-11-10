@@ -2,19 +2,22 @@ using UnityEngine;
 
 public class teleport : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public Transform teleportTarget;
+    public GameObject Player;
+    
+   void OnTriggerEnter(Collider other)
     {
      
-        if (other.CompareTag("Player"))
-        {
-          
-            Transform destination = wormholeExits.Instance.GetRandomTargetPoint();
+        //if (other.CompareTag("Player"))
+        //{
 
-            if (destination != null)
-            {
+            Player.transform.position = teleportTarget.transform.position;
+
+            //if (destination != null)
+            //{
               
-                other.transform.position = destination.position;
-            }
-        }
+            //    other.transform.position = destination.position;
+            //}
+        //}
     }
 }
