@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+using UnityEngine.Playables;
 public class layerController : MonoBehaviour
 {
 
@@ -12,8 +13,8 @@ public class layerController : MonoBehaviour
 
     private float movementX;  // Movement along X axes
     private float movementY;  // Movement along Y axes
-   
 
+    public PlayableDirector sdf1Timeline;
     public float speed = 0; // Speed MrBall moves
     public TextMeshProUGUI countText; //creates Count Text obj
     public GameObject winTextObject;  //creates win text obj
@@ -42,9 +43,10 @@ public class layerController : MonoBehaviour
              winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
 
-             //play(RecoveryBeam);
+            sdf1Timeline.Play();
+            
         }
-       }
+    }
    
 
 
