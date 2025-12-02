@@ -19,6 +19,9 @@ public class layerController : MonoBehaviour
     public TextMeshProUGUI countText; //creates Count Text obj
     public GameObject winTextObject;  //creates win text obj
 
+    private bool timelineTriggered = false;
+
+
     void Start() // Start called before first frame update
     {
         rb = GetComponent<Rigidbody>();  // Get & stores Rigidbody attached to MrBall
@@ -34,27 +37,38 @@ public class layerController : MonoBehaviour
         movementX = movementVector.x;// Stores the X movement
         movementY = movementVector.y;// Stores the y movement
     }
-      void SetCountText()
-       {
-           countText.text = "Collect all 12 ARTI Units \n ARTI units recovered: " + count.ToString(); // sets count to output to string
+    void SetCountText()
+    {
+        countText.text = "Collect all 12 ARTI Units \n ARTI units recovered: " + count.ToString(); // sets count to output to string
 
-           if (count >= 12)  //checks ammount collected
-         {
-             winTextObject.SetActive(true);
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-
-            sdf1Timeline.Play();
-            
+        if (count >= 12 /*&& !timelineTriggered*/)  //checks ammount collected
+        {
+            TriggerWin();
+            End();
         }
     }
+    void TriggerWin()
+    {
+        timelineTriggered = true;
+        winTextObject.SetActive(true);
+        Destroy(GameObject.FindGameObjectWithTag("Enemy"));
    
-
-
+        //if (sdf1Timeline != null)
+        //{
+        //    sdf1Timeline.Play();
+        //}
+    }
+    private void End()
+    {
+        if(count==12)
+        {
+            sdf1Timeline.Play();
+        }
+    }
 
     private void FixedUpdate() // FixedUpdate called once per fixed f-r frame
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);  // Creates 3D move vector using  X and Y input
-
         rb.AddForce(movement * speed); // Applies force to  Rigidbody to move MrBall
     }
 
@@ -63,9 +77,8 @@ public class layerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp")) //checks obj ffor PickUp tag
         {
             other.gameObject.SetActive(false); //deactivates obj when collided
-           
             count++; //adds 1 to count when picked up
-           SetCountText();   //calls SetCountText method
+            SetCountText();   //calls SetCountText method
         } 
         
     }
@@ -73,9 +86,7 @@ public class layerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            
             Destroy(gameObject);// Destroy player object
-
             winTextObject.gameObject.SetActive(true);              // Update the winText for loss
             winTextObject.GetComponent<TextMeshProUGUI>().text = "Pirates caught you... Mission Failed";
         }
